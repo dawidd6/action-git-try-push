@@ -1,13 +1,19 @@
-name: 'Wait'
-description: 'Wait a designated number of milliseconds'
+name: Git try push
+description: Try to push to remote repository specified number of times
+author: dawidd6
+branding:
+  icon: arrow-up-circle
+  color: blue
 inputs:
-  milliseconds:  # id of input
-    description: 'number of milliseconds to wait'
+  token:
+    description: Github token (used for push, not required if not needed)
+    required: false
+  tries:
+    description: How many times to try pushing (defaults to 10)
     required: true
-    default: '1000'
-outputs:
-  time: # output will be available to future steps 
-    description: 'The message to output'
+  directory:
+    description: Repository directory (defaults to current)
+    required: false
 runs:
-  using: 'node12'
-  main: 'dist/index.js'
+  using: node12
+  main: main.js
