@@ -1,14 +1,29 @@
 name: Test Action
 
-on: push
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
+      - name: Checkout
         uses: actions/checkout@v2
-      - name: Try push
+        with:
+          fetch-depth: 2
+      - name: Prepare
+        run: |
+          git checkout -b test-try-push
+          git push origin test-try-push
+          git reset --hard HEAD~1
+          git checkout -
+      - name: Push
         uses: ./
         with:
-          tries: 5
+          branch: test-try-push
+      - name: Clean
+        if: always()
+        run: |
+          git push --delete origin test-try-push

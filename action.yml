@@ -6,14 +6,23 @@ branding:
   color: blue
 inputs:
   token:
-    description: Github token (used for push, not required if not needed)
+    description: GitHub token (used for push)
     required: false
-  tries:
-    description: How many times to try pushing (defaults to 10)
-    required: true
   directory:
-    description: Repository directory (defaults to current)
+    description: Repository directory
     required: false
+  remote:
+    description: Git remote
+    required: false
+    default: origin
+  branch:
+    description: Git branch
+    required: false
+    default: master
+  tries:
+    description: How many times to try pushing
+    required: false
+    default: "20"
 runs:
   using: node12
   main: main.js
